@@ -26,6 +26,15 @@ collections:
       - { label: "Nombre", name: "title", widget: "string" }
       - { label: "Thumbnail", name: "image", widget: "image" }
       - { label: "Descripción General", name: "descripcion", widget: "text" }
+      - {
+          label: "Categoría",
+          name: "categoria",
+          widget: "relation",
+          collection: "categorias",
+          search_fields: ["title"],
+          value_field: "title",
+          display_fields: ["title"],
+        }
       - { name: "date", label: "Date", widget: "datetime" }
       - { name: "body", label: "Body", widget: "markdown" }
       - { name: "author", label: "Author" }
@@ -35,3 +44,11 @@ collections:
           widget: "boolean",
           default: false,
         }
+  - name: "categorias"
+    label: "Categorías"
+    folder: "src/content/categorias"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción", name: "descripcion", widget: "text" }
