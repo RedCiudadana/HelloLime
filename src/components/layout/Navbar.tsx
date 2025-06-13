@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Diamond as Lemon, Menu, X, Instagram, Linkedin } from 'lucide-react';
-import LimeLogo from '../../assets/images/LIME-03.png';
+import LimeLogo from '../../assets/images/LIME-13.png';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
         <Link to="/" className="flex items-center space-x-2" onClick={closeMenu}>
           {/* <Lemon size={32} className="text-lime-primary" />
           <span className="text-xl font-poppins font-bold">Hello Lime</span> */}
-          <img src={LimeLogo} width={'100px'}/>
+          <img src={LimeLogo} width={'200px'}/>
         </Link>
 
         {/* Desktop Navigation */}

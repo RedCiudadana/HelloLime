@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Diamond as Lemon, Instagram, Facebook, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import LimeLogo from '../../assets/images/LIME-13.png';
 
 const Footer: React.FC = () => {
   return (
@@ -10,8 +11,7 @@ const Footer: React.FC = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <Lemon size={32} className="text-lime-primary" />
-              <span className="text-xl font-bold">Hello Lime</span>
+              <img src={LimeLogo} width={'200px'}/>
             </div>
             <p className="text-gray-300">
               Impulsamos tu marca con contenido visual, estratégico y auténtico desde 2018.
