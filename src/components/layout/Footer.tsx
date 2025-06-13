@@ -17,15 +17,15 @@ const Footer: React.FC = () => {
               Impulsamos tu marca con contenido visual, estratégico y auténtico desde 2018.
             </p>
             <div className="flex space-x-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href="https://www.instagram.com/limesocialmedia?igsh=MWU4b2Q3dXQyOWU3dg==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <Instagram className="text-white hover:text-lime-primary transition-colors" />
               </a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <a href="https://www.facebook.com/share/1CFZsS6i3J/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <Facebook className="text-white hover:text-lime-primary transition-colors" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              {/* <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <Linkedin className="text-white hover:text-lime-primary transition-colors" />
-              </a>
+              </a> */}
             </div>
           </div>
 
@@ -47,19 +47,19 @@ const Footer: React.FC = () => {
               <li className="flex items-center space-x-2">
                 <Mail size={18} className="text-lime-primary" />
                 <a href="mailto:hola@hellolime.com" className="text-gray-300 hover:text-lime-primary transition-colors">
-                  hola@hellolime.com
+                  info@hellolime.com.gt
                 </a>
               </li>
               <li className="flex items-center space-x-2">
                 <Phone size={18} className="text-lime-primary" />
                 <a href="tel:+123456789" className="text-gray-300 hover:text-lime-primary transition-colors">
-                  +1 (234) 567-890
+                  +(502) 3031-2752
                 </a>
               </li>
               <li className="flex items-start space-x-2">
                 <MapPin size={18} className="text-lime-primary mt-1" />
                 <span className="text-gray-300">
-                  Ciudad de México, México
+                  Atlantis, Zona 10, Guatemala
                 </span>
               </li>
             </ul>

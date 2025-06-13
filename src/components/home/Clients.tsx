@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { Building, ShoppingBag, Utensils, Dumbbell, GraduationCap, Heart, Cake } from 'lucide-react';
+import { Building, User, Utensils, Dumbbell, Gem, Cake, Scissors } from 'lucide-react';
 
 interface ClientLogoProps {
   icon: React.ReactNode;
@@ -15,11 +15,11 @@ const clientLogos: Omit<ClientLogoProps, 'index'>[] = [
     name: "Bares",
   },
   {
-    icon: <ShoppingBag size={32} className="text-lime-primary" />,
+    icon: <Gem size={32} className="text-lime-primary" />,
     name: "Joyeria",
   },
   {
-    icon: <GraduationCap size={32} className="text-lime-primary" />,
+    icon: <User size={32} className="text-lime-primary" />,
     name: "ONG",
   },
   {
@@ -27,11 +27,11 @@ const clientLogos: Omit<ClientLogoProps, 'index'>[] = [
     name: "Club deportivo",
   },
   {
-    icon: <Building size={32} className="text-lime-primary" />,
+    icon: <Scissors size={32} className="text-lime-primary" />,
     name: "Barberia",
   },
   {
-    icon: <Heart size={32} className="text-lime-primary" />,
+    icon: <Building size={32} className="text-lime-primary" />,
     name: "Colegios",
   },
   {
@@ -77,7 +77,7 @@ const Clients: React.FC = () => {
           className="text-center max-w-3xl mx-auto mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Marcas que <span className="text-lime-primary">confían</span> en nosotros
+            Sectores donde generamos <span className="text-lime-primary">impacto</span>
           </h2>
           <p className="text-xl text-gray-600">
             Nuestros clientes nos respaldan con su confianza
