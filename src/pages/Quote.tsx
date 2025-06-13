@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Check, Diamond as Lemon, MessageCircle } from 'lucide-react';
+import LimeLogo from '../assets/images/LIME-13.png';
 
 interface FormData {
   name: string;
@@ -40,16 +41,37 @@ const Quote: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyKccUa4_-d-EFPaFwvZNoikUIst48ck04sHEenfodL6818AKZj5wrcXXgEoCTkXFMa/exec';
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    // Construimos FormData para enviar multipart/form-data
+    const data = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      data.append(key, value);
+    });
+
+    try {
+      const resp = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: data  // NO especificamos Content-Type: el navegador lo configura automáticamente
+      });
+      const json = await resp.json();
+      if (json.result === 'success') {
+        setIsSubmitted(true);
+        setFormData(initialFormData);
+      } else {
+        console.error('Error en servidor:', json.error);
+        alert('Error al enviar. Intenta de nuevo.');
+      }
+    } catch (err) {
+      console.error('Fetch error:', err);
+      alert('No se pudo conectar con el servidor.');
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData(initialFormData);
-    }, 1500);
+    }
   };
 
   return (
@@ -65,8 +87,7 @@ const Quote: React.FC = () => {
               
               <div className="relative z-10">
                 <div className="flex items-center space-x-2 mb-8">
-                  <Lemon size={32} className="text-white" />
-                  <span className="text-2xl font-bold">Hello Lime</span>
+                  <img src={LimeLogo} style={{ filter: 'brightness(0) invert(1)', width:'250px' }} />
                 </div>
                 
                 <h1 className="text-3xl md:text-4xl font-bold mb-6">
@@ -112,7 +133,7 @@ const Quote: React.FC = () => {
                 <div className="mt-12">
                   <p className="font-semibold mb-2">¿Prefieres contactarnos directamente?</p>
                   <a
-                    href="https://wa.me/123456789"
+                    href="https://wa.me/50230312752"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center px-6 py-3 bg-white text-lime-primary rounded-full font-medium hover:bg-gray-100 transition-colors"
