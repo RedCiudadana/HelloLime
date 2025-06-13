@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Diamond as Lemon, Instagram, Facebook, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Diamond as Instagram, Facebook, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import LimeLogo from '../../assets/images/LIME-13.png';
 
 const Footer: React.FC = () => {

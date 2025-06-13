@@ -22,7 +22,7 @@ const WhatsAppButton: React.FC = () => {
     setShowTooltip(false);
   };
 
-  const whatsappNumber = '+123456789'; // Replace with actual WhatsApp number
+  const whatsappNumber = '+50230312752'; // Replace with actual WhatsApp number
   const message = 'Hola, me gustaría información sobre sus servicios de marketing digital';
 
   return (
