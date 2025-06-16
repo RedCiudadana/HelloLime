@@ -56,22 +56,42 @@ const Quote: React.FC = () => {
     try {
       const resp = await fetch(SCRIPT_URL, {
         method: 'POST',
-        body: data  // NO especificamos Content-Type: el navegador lo configura automáticamente
+        body: data,              // FormData (multipart/form-data)
       });
-      const json = await resp.json();
-      if (json.result === 'success') {
-        setIsSubmitted(true);
-        setFormData(initialFormData);
-      } else {
-        console.error('Error en servidor:', json.error);
-        alert('Error al enviar. Intenta de nuevo.');
+
+      // 1) Errores HTTP (status ≠ 2xx)
+      if (!resp.ok) {
+        console.error('Error HTTP:', resp.status, resp.statusText);
+        alert(`Error al conectar: ${resp.statusText}`);
+        return;
       }
-    } catch (err) {
-      console.error('Fetch error:', err);
+
+      // 2) Leer la respuesta como texto
+      const text = await resp.text();
+
+      // 3) Intentar parsear JSON por separado
+      try {
+        const json = JSON.parse(text);
+        if (json.result === 'success') {
+          setIsSubmitted(true);
+          setFormData(initialFormData);
+        } else {
+          console.error('Error en servidor:', json.error);
+          alert('Error al enviar. Intenta de nuevo.');
+        }
+      } catch (parseErr) {
+        console.error('JSON inválido:', text);
+        alert('Error en la respuesta del servidor.');
+      }
+
+    } catch (networkErr) {
+      // 4) Errores de red (fetch rechazado)
+      console.error('Error de red:', networkErr);
       alert('No se pudo conectar con el servidor.');
     } finally {
       setIsSubmitting(false);
     }
+
   };
 
   return (
