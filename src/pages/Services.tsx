@@ -11,6 +11,10 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import Servicio1 from '../assets/images/services/pautas.jpg';
+import Servicio2 from '../assets/images/services/desarrolloweb.jpg';
+import Servicio3 from '../assets/images/services/redessociales.svg';
+import Servicio4 from '../assets/images/services/disenografico.jpg';
 
 interface ServiceProps {
   icon: React.ReactNode;
@@ -27,28 +31,28 @@ const services: Omit<ServiceProps, 'index'>[] = [
     title: "Pauta digital inteligente",
     list: ['Estrategias de Publicidad', 'Facebook Ads', 'Instagram Ads'],
     description: "Optimizamos tu inversión en publicidad digital con campañas segmentadas y efectivas. Analizamos resultados constantemente para mejorar el rendimiento y maximizar el ROI de tu inversión publicitaria.",
-    image: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=600",
+    image: Servicio1,
   },
   {
     icon: <Palette size={40} className="text-lime-primary" />,
     title: "Desarrollo Web",
     list: ['Análisis Web', 'Diseño Web', 'Google Analytics', 'Chatbots'],
     description: "",
-    image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=600",
+    image: Servicio2,
   },
   {
     icon: <Camera size={40} className="text-lime-primary" />,
     title: "Redes Sociales",
-    list: ['Socia Media Management', 'Community Management', 'Análisis y Reportería (KPls)'],
+    list: ['Social Media Management', 'Community Management', 'Análisis y Reportería (KPls)'],
     description: "Gestionamos tus redes sociales de forma integral, creando comunidad y manteniendo una comunicación activa con tu audiencia. Incluye creación de contenido, programación y atención de comentarios y mensajes.",
-    image: "https://images.pexels.com/photos/9803258/pexels-photo-9803258.jpeg?auto=compress&cs=tinysrgb&w=600",
+    image: Servicio3,
   },
   {
     icon: <Palette size={40} className="text-lime-primary" />,
     title: "Diseño Gráfico y Producción Audiovisual",
     list: ['Diseño Gráfico Digital', 'Animación', 'Fotografía'],
     description: "Sesiones de fotos profesionales para tu marca, productos o servicios. Utilizamos nuestros equipos de última generación para capturar imágenes que destacan en el feed y generan mayor interacción.",
-    image: "https://images.pexels.com/photos/7414214/pexels-photo-7414214.jpeg?auto=compress&cs=tinysrgb&w=600",
+    image: Servicio4,
   },
   {
     icon: <Video size={40} className="text-lime-primary" />,
@@ -85,9 +89,9 @@ const Service: React.FC<ServiceProps> = ({ icon, title, description, image, inde
       <div className="w-full lg:w-1/2 p-8 lg:p-12 flex flex-col justify-center">
         <div className="mb-4">{icon}</div>
         <h3 className="text-2xl font-bold mb-4">{title}</h3>
-        <ul className="text-md mb-3 text-gray-600 block group-hover:hidden transition-opacity duration-300" style={{listStyle:'disc', marginLeft:20}}>
+        <ul className="text-md mb-3 text-gray-600" style={{listStyle:'disc', marginLeft:20}}>
           {list.map((item) => (
-            <p><li>{item}</li></p>
+            <li key={item}>{item}</li>
           ))}
         </ul>
         <p className="text-gray-600 mb-6">{description}</p>
@@ -110,14 +114,12 @@ const Services: React.FC = () => {
   });
 
   useEffect(() => {
-    // Update page title
     document.title = 'Servicios | Hello Lime';
-    // Scroll to top on page load
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="pt-24 pb-16">
+    <div className="pt-24 ">
       <section className="py-16 bg-gray-50">
         <div className="container">
           <motion.div
