@@ -41,57 +41,39 @@ const Quote: React.FC = () => {
     });
   };
 
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSUIYzDe28fZltfNUnQRRcmHrH5b-syEKvcO_R0KqGBY9cNOSSuj6jPyEDtaFH7s2E/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzg11R2Q0Rcgyj8jsjWngr22teaVkaPErmcg1HrVAyVAnP9trp5g6OY9MWJU0SyMNfa/exec';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Construimos FormData para enviar multipart/form-data
-    const data = new FormData();
-    Object.entries(formData).forEach(([key, value]) => {
-      data.append(key, value);
-    });
-
     try {
-      const resp = await fetch(SCRIPT_URL, {
-        method: 'POST',
-        body: data,              // FormData (multipart/form-data)
-      });
+      const params = new URLSearchParams();
+      params.append('name', formData.name.trim());
+      params.append('email', formData.email.trim());
+      params.append('phone', formData.phone.trim());
+      params.append('instagram', formData.instagram.trim());
+      params.append('service', formData.service.trim());
+      params.append('comment', formData.comment.trim());
+      params.append('timestamp', new Date().toLocaleString('es-GT', { timeZone: 'America/Guatemala' }));
 
-      // 1) Errores HTTP (status ≠ 2xx)
-      if (!resp.ok) {
-        console.error('Error HTTP:', resp.status, resp.statusText);
-        alert(`Error al conectar: ${resp.statusText}`);
-        return;
-      }
+      await fetch(`${SCRIPT_URL}?${params.toString()}`, {
+        method: 'GET',
+      })
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+      .then(json => console.log('Respuesta del script:', json))
+      .catch(err => console.error('Error al llamar al Apps Script:', err));
 
-      // 2) Leer la respuesta como texto
-      const text = await resp.text();
-
-      // 3) Intentar parsear JSON por separado
-      try {
-        const json = JSON.parse(text);
-        if (json.result === 'success') {
-          setIsSubmitted(true);
-          setFormData(initialFormData);
-        } else {
-          console.error('Error en servidor:', json.error);
-          alert('Error al enviar. Intenta de nuevo.');
-        }
-      } catch (parseErr) {
-        console.error('JSON inválido:', text);
-        alert('Error en la respuesta del servidor.');
-      }
-
-    } catch (networkErr) {
-      // 4) Errores de red (fetch rechazado)
-      console.error('Error de red:', networkErr);
-      alert('No se pudo conectar con el servidor.');
+      setIsSubmitted(true);
+      setFormData(initialFormData);
+    } catch (err) {
+      // Opcional: mostrar error al usuario
     } finally {
       setIsSubmitting(false);
     }
-
   };
 
   return (
