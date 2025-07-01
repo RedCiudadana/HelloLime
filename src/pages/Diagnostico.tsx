@@ -446,6 +446,34 @@ const Diagnostico: React.FC = () => {
     return recommendations;
   };
 
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzk_fRO7-v7e8u2LCFqq5NJPX1e2g-XkRb78Fmh4OTJg_OJuHroB9sS4nXYvxGJeHaEFQ/exec';
+  
+  const handleContactSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    /* build querystring */
+    const qp = new URLSearchParams({
+      timestamp: new Date().toISOString(),
+      email   : contactInfo.email.trim(),
+      answers : JSON.stringify(answers),
+      results : JSON.stringify(results),
+      callback: 'diagnosticoCB',
+    });
+
+    const s = document.createElement('script');
+    s.src = `${SCRIPT_URL}?${qp.toString()}`;
+
+    (window as any).diagnosticoCB = (json: any) => {
+      if (json.success) setShowContact(false);
+      else alert(json.error || 'Ocurrió un error');
+
+      s.remove();
+      delete (window as any).diagnosticoCB;
+    };
+
+    document.body.appendChild(s);
+  };
+
   return (
     <div className="pt-24 pb-16">
       <section className="py-16 bg-gray-50">
@@ -524,15 +552,13 @@ const Diagnostico: React.FC = () => {
               </div>
             ) : (
               <div className="bg-white rounded-xl shadow-lg p-8 md:p-12">
-                {showContact && !contactInfo.email ? (
+                {showContact ? (
                   <div className="mb-12">
                     <h3 className="text-xl font-semibold mb-4">
                       Ingresa tus datos para recibir el diagnóstico completo
                     </h3>
-                    <form onSubmit={(e) => {
-                      e.preventDefault();
-                      setResults(prev => prev);
-                    }} className="space-y-4">
+                    <form onSubmit={handleContactSubmit} className="space-y-4">
+                      {/* Email */}
                       <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                           Email profesional
@@ -541,42 +567,22 @@ const Diagnostico: React.FC = () => {
                           type="email"
                           id="email"
                           value={contactInfo.email}
-                          onChange={(e) => setContactInfo({ ...contactInfo, email: e.target.value })}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-primary focus:border-transparent"
+                          onChange={e => setContactInfo({ ...contactInfo, email: e.target.value })}
                           required
+                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-lime-primary"
                         />
                       </div>
-                      <div>
-                        <label htmlFor="whatsapp" className="block text-sm font-medium text-gray-700 mb-1">
-                          WhatsApp (opcional)
-                        </label>
-                        <input
-                          type="tel"
-                          id="whatsapp"
-                          value={contactInfo.whatsapp}
-                          onChange={(e) => setContactInfo({ ...contactInfo, whatsapp: e.target.value })}
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-lime-primary focus:border-transparent"
-                          placeholder="+1234567890"
-                        />
+                      {/* Aceptación de política */}
+                      <div className="mt-6 p-4 bg-gray-50 rounded-lg border">
+                        <p className="text-sm text-gray-600">
+                          Al enviar este formulario, aceptas nuestra{' '}
+                          <Link to="/privacidad" className="text-lime-primary hover:underline" target="_blank">
+                            política de privacidad
+                          </Link>{' '}
+                          y consientes recibir comunicaciones relacionadas con tu diagnóstico.
+                        </p>
                       </div>
-                      
-                      <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
-                        <div className="flex items-start space-x-3">
-                          <Lock className="text-lime-primary mt-1" size={20} />
-                          <p className="text-sm text-gray-600">
-                            Al enviar este formulario, aceptas nuestra{' '}
-                            <Link to="/privacidad" className="text-lime-primary hover:underline" target="_blank">
-                              política de privacidad
-                            </Link>
-                            {' '}y consientes recibir comunicaciones relacionadas con tu diagnóstico digital.
-                          </p>
-                        </div>
-                      </div>
-                      
-                      <button
-                        type="submit"
-                        className="w-full btn btn-primary"
-                      >
+                      <button type="submit" className="w-full btn btn-primary">
                         Ver mi diagnóstico completo
                       </button>
                     </form>
