@@ -41,7 +41,7 @@ const Quote: React.FC = () => {
     });
   };
 
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzgl1m-br6m7yB1S9opRg6pQVUj_3vS2rkuqD0DiWW7VquI2fSQ5FZH6O1cXO0OgLBu/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyUUjzCtRWiLiymR-5WMVLrNALFPXJ93gLL0hGA1DenUk76NuoEWK7yP1rCPeDEzoIw/exec';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
