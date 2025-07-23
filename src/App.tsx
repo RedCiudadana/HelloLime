@@ -30,7 +30,7 @@ function App() {
         </Routes>
       </main>
       <WhatsAppButton />
-      <WhitepaperPopup />
+      {/* <WhitepaperPopup /> */}
       <Footer />
     </div>
   );

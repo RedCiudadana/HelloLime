@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
                 <FileSpreadsheet className="ml-2 group-hover:scale-110 transition-transform" size={20} />
               </Link>
               <a 
-                href="https://wa.me/50230312752"
+                href="https://wa.me/50230559906"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn bg-[#25D366] text-white hover:bg-[#128C7E] btn-lg group"

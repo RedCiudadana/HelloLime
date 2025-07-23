@@ -135,7 +135,7 @@ const Quote: React.FC = () => {
                 <div className="mt-12">
                   <p className="font-semibold mb-2">¿Prefieres contactarnos directamente?</p>
                   <a
-                    href="https://wa.me/50230312752"
+                    href="https://wa.me/50230559906"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center px-6 py-3 bg-white text-lime-primary rounded-full font-medium hover:bg-gray-100 transition-colors"

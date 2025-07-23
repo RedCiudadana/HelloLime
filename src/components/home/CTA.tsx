@@ -10,7 +10,7 @@ const CTA: React.FC = () => {
     threshold: 0.1,
   });
 
-  const whatsappNumber = '+50230312752'; // Replace with actual WhatsApp number
+  const whatsappNumber = '+50230559906'; // Replace with actual WhatsApp number
   const message = 'Hola, me gustaría información sobre sus servicios de marketing digital';
 
   return (

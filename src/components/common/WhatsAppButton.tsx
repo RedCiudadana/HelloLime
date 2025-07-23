@@ -22,7 +22,7 @@ const WhatsAppButton: React.FC = () => {
     setShowTooltip(false);
   };
 
-  const whatsappNumber = '+50230312752'; // Replace with actual WhatsApp number
+  const whatsappNumber = '+50230559906'; // Replace with actual WhatsApp number
   const message = 'Hola, me gustaría información sobre sus servicios de marketing digital';
 
   return (
@@ -34,8 +34,8 @@ const WhatsAppButton: React.FC = () => {
       <div className="relative">
         {showTooltip && (
           <div className="absolute bottom-full right-0 mb-3 bg-white text-dark-primary rounded-lg shadow-lg p-4 text-sm min-w-64 transition-opacity duration-200">
-            <p className="font-medium mb-1">¿Necesitas ayuda con tu marca?</p>
-            <p className="text-gray-600">Respuesta inmediata vía WhatsApp 👋</p>
+            {/* <p className="font-medium mb-1">¿Necesitas ayuda con tu marca?</p> */}
+            <p className="text-gray-600">Estoy interesado en contratar los servicios de HelloLime</p>
             <div className="absolute bottom-0 right-4 transform translate-y-1/2 rotate-45 w-3 h-3 bg-white"></div>
           </div>
         )}
