@@ -52,8 +52,8 @@ const Footer: React.FC = () => {
               </li>
               <li className="flex items-center space-x-2">
                 <Phone size={18} className="text-lime-primary" />
-                <a href="tel:+123456789" className="text-gray-300 hover:text-lime-primary transition-colors">
-                  +(502) 3031-2752
+                <a href="tel:+50230559906" className="text-gray-300 hover:text-lime-primary transition-colors">
+                  +(502) 3055-9906
                 </a>
               </li>
               <li className="flex items-start space-x-2">
