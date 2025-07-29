@@ -446,7 +446,7 @@ const Diagnostico: React.FC = () => {
     return recommendations;
   };
 
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzk_fRO7-v7e8u2LCFqq5NJPX1e2g-XkRb78Fmh4OTJg_OJuHroB9sS4nXYvxGJeHaEFQ/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby55L6xDkjaZa2PwChXNKxKWnwTGM7_DISsbxKON11oyej6vD8ls9nrjeMOSC-B7raPoA/exec';
   
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Diamond as Instagram, Facebook, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import LimeLogo from '../../assets/images/LIME-13.png';
 
 const Footer: React.FC = () => {
@@ -17,11 +17,14 @@ const Footer: React.FC = () => {
               Impulsamos tu marca con contenido visual, estratégico y auténtico desde 2018.
             </p>
             <div className="flex space-x-4">
-              <a href="https://www.instagram.com/limesocialmedia?igsh=MWU4b2Q3dXQyOWU3dg==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href="https://www.instagram.com/limesocialmedia" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <Instagram className="text-white hover:text-lime-primary transition-colors" />
               </a>
-              <a href="https://www.facebook.com/share/1CFZsS6i3J/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <a href="https://www.facebook.com/LimeSocialMedia" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <Facebook className="text-white hover:text-lime-primary transition-colors" />
+              </a>
+              <a href="https://www.linkedin.com/company/108030626/" target="_blank" rel="noopener noreferrer" aria-label="Linkedin">
+                <Linkedin className="text-white hover:text-lime-primary transition-colors" />
               </a>
               {/* <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <Linkedin className="text-white hover:text-lime-primary transition-colors" />

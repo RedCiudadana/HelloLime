@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { Diamond as Lemon, Menu, X, Instagram, Linkedin } from 'lucide-react';
+import { Diamond as Lemon, Menu, X, Instagram, Linkedin, Facebook } from 'lucide-react';
 import LimeLogo from '../../assets/images/LIME-13.png';
 
 const Navbar: React.FC = () => {
@@ -66,7 +66,7 @@ const Navbar: React.FC = () => {
           {/* Social Media Links */}
           <div className="flex items-center space-x-4 border-l pl-4 border-gray-200">
             <a 
-              href="https://instagram.com/hellolime" 
+              href="https://www.instagram.com/limesocialmedia" 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-dark-primary hover:text-lime-primary transition-colors"
@@ -75,7 +75,16 @@ const Navbar: React.FC = () => {
               <Instagram size={20} />
             </a>
             <a 
-              href="https://linkedin.com/company/hellolime" 
+              href="https://www.facebook.com/LimeSocialMedia" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-dark-primary hover:text-lime-primary transition-colors"
+              aria-label="Síguenos en Instagram"
+            >
+              <Facebook size={20} />
+            </a>
+            <a 
+              href="https://www.linkedin.com/company/108030626/ " 
               target="_blank" 
               rel="noopener noreferrer"
               className="text-dark-primary hover:text-lime-primary transition-colors"
