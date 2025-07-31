@@ -311,6 +311,8 @@ const Diagnostico: React.FC = () => {
   const [results, setResults] = useState<Results | null>(null);
   const [showContact, setShowContact] = useState(false);
   const [contactInfo, setContactInfo] = useState<ContactInfo>({ email: '', whatsapp: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -446,32 +448,48 @@ const Diagnostico: React.FC = () => {
     return recommendations;
   };
 
-  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby55L6xDkjaZa2PwChXNKxKWnwTGM7_DISsbxKON11oyej6vD8ls9nrjeMOSC-B7raPoA/exec';
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyig3aUnqOrczA9VkwUx3UWPjf0BFHaaTKpfTFmAU64dJZ-RwVtty3g3k69bcrN-asgig/exec';
   
-  const handleContactSubmit = (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
-    /* build querystring */
-    const qp = new URLSearchParams({
-      timestamp: new Date().toISOString(),
-      email   : contactInfo.email.trim(),
-      answers : JSON.stringify(answers),
-      results : JSON.stringify(results),
-      callback: 'diagnosticoCB',
-    });
+    try {
+      const params = new URLSearchParams();
+      params.append('timestamp', new Date().toISOString());
+      params.append('email', contactInfo.email.trim());
+      // Enviar cada respuesta individualmente
+      answers.forEach((answer, index) => {
+        params.append(`pregunta${index + 1}`, answer);
+      });
+      // Enviar resultados individuales
+      if (results) {
+        params.append('estrategia', results.strategy.toString());
+        params.append('contenido', results.content.toString());
+        params.append('engagement', results.engagement.toString());
+        params.append('consistencia', results.consistency.toString());
+        params.append('branding', results.branding.toString());
+      }
 
-    const s = document.createElement('script');
-    s.src = `${SCRIPT_URL}?${qp.toString()}`;
+      const response = await fetch(`${SCRIPT_URL}?${params.toString()}`, {
+        method: 'GET',
+      });
 
-    (window as any).diagnosticoCB = (json: any) => {
-      if (json.success) setShowContact(false);
-      else alert(json.error || 'Ocurrió un error');
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const json = await response.json();
 
-      s.remove();
-      delete (window as any).diagnosticoCB;
-    };
-
-    document.body.appendChild(s);
+      if (json.success) {
+        setShowContact(false);
+        setIsSubmitted(true);
+        setContactInfo({ email: '', whatsapp: '' });
+      } else {
+        alert(json.error || 'Ocurrió un error');
+      }
+    } catch (err) {
+      alert('Ocurrió un error al enviar el formulario');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -553,40 +571,59 @@ const Diagnostico: React.FC = () => {
             ) : (
               <div className="bg-white rounded-xl shadow-lg p-8 md:p-12">
                 {showContact ? (
-                  <div className="mb-12">
-                    <h3 className="text-xl font-semibold mb-4">
-                      Ingresa tus datos para recibir el diagnóstico completo
-                    </h3>
-                    <form onSubmit={handleContactSubmit} className="space-y-4">
-                      {/* Email */}
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                          Email profesional
-                        </label>
-                        <input
-                          type="email"
-                          id="email"
-                          value={contactInfo.email}
-                          onChange={e => setContactInfo({ ...contactInfo, email: e.target.value })}
-                          required
-                          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-lime-primary"
-                        />
-                      </div>
-                      {/* Aceptación de política */}
-                      <div className="mt-6 p-4 bg-gray-50 rounded-lg border">
-                        <p className="text-sm text-gray-600">
-                          Al enviar este formulario, aceptas nuestra{' '}
-                          <Link to="/privacidad" className="text-lime-primary hover:underline" target="_blank">
-                            política de privacidad
-                          </Link>{' '}
-                          y consientes recibir comunicaciones relacionadas con tu diagnóstico.
+                  <>
+                    {isSubmitted && (
+                      <div className="mb-12 text-center">
+                        <div className="w-20 h-20 bg-lime-primary/10 rounded-full flex items-center justify-center mb-6 mx-auto">
+                          <CheckCircle2 size={40} className="text-lime-primary" />
+                        </div>
+                        <h2 className="text-2xl md:text-3xl font-bold mb-4">¡Diagnóstico enviado con éxito!</h2>
+                        <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">
+                          Hemos recibido tus datos. Te enviaremos el diagnóstico completo a tu correo electrónico.
                         </p>
+                        <button
+                          onClick={() => setIsSubmitted(false)}
+                          className="btn btn-outline"
+                        >
+                          Enviar otro diagnóstico
+                        </button>
                       </div>
-                      <button type="submit" className="w-full btn btn-primary">
-                        Ver mi diagnóstico completo
-                      </button>
-                    </form>
-                  </div>
+                    )}
+                    <div className="mb-12">
+                      <h3 className="text-xl font-semibold mb-4">
+                        Ingresa tus datos para recibir el diagnóstico completo
+                      </h3>
+                      <form onSubmit={handleContactSubmit} className="space-y-4">
+                        {/* Email */}
+                        <div>
+                          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                            Email profesional
+                          </label>
+                          <input
+                            type="email"
+                            id="email"
+                            value={contactInfo.email}
+                            onChange={e => setContactInfo({ ...contactInfo, email: e.target.value })}
+                            required
+                            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-lime-primary"
+                          />
+                        </div>
+                        {/* Aceptación de política */}
+                        <div className="mt-6 p-4 bg-gray-50 rounded-lg border">
+                          <p className="text-sm text-gray-600">
+                            Al enviar este formulario, aceptas nuestra{' '}
+                            <Link to="/privacidad" className="text-lime-primary hover:underline" target="_blank">
+                              política de privacidad
+                            </Link>{' '}
+                            y consientes recibir comunicaciones relacionadas con tu diagnóstico.
+                          </p>
+                        </div>
+                        <button type="submit" className="w-full btn btn-primary" disabled={isSubmitting}>
+                          {isSubmitting ? 'Enviando...' : 'Ver mi diagnóstico completo'}
+                        </button>
+                      </form>
+                    </div>
+                  </>
                 ) : (
                   <>
                     <div className="text-center mb-12">
