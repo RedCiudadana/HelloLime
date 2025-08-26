@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Instagram, Facebook, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
-import LimeLogo from '../../assets/images/LIME-13.png';
+import LimeLogo from '../../assets/images/LIMELOGO.png';
 
 const Footer: React.FC = () => {
   return (

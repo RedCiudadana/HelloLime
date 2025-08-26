@@ -10,7 +10,7 @@ import CTA from '../components/home/CTA';
 const Home: React.FC = () => {
   useEffect(() => {
     // Update page title
-    document.title = 'Hello Lime | Comunicación digital con sabor fresco';
+    document.title = 'Lime | Comunicación digital con sabor fresco';
     // Scroll to top on page load
     window.scrollTo(0, 0);
   }, []);
