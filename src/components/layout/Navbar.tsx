@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import { Diamond as Lemon, Menu, X, Instagram, Linkedin, Facebook } from 'lucide-react';
-import LimeLogo from '../../assets/images/LIME-13.png';
+import LimeLogo from '../../assets/images/LIMELOGO.png';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
