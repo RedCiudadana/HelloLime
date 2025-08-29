@@ -44,7 +44,7 @@ const Navbar: React.FC = () => {
         <Link to="/" className="flex items-center space-x-2" onClick={closeMenu}>
           {/* <Lemon size={32} className="text-lime-primary" />
           <span className="text-xl font-poppins font-bold">Hello Lime</span> */}
-          <img src={LimeLogo} width={'200px'}/>
+          <img src={LimeLogo} width={'200px'} style={{marginBottom: '10px'}}/>
         </Link>
 
         {/* Desktop Navigation */}

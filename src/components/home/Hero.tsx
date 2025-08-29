@@ -18,7 +18,7 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.6 }}
             className="text-center lg:text-left"
           >
-            <div className="inline-flex items-center space-x-2 mb-6 bg-lime-primary/10 px-4 py-2 rounded-full">
+            <div className="inline-flex items-center space-x-2 mb-6 bg-lime-primary/10 px-4 py-2 rounded-full mt-10">
               <Lemon size={20} className="text-lime-primary" />
               <span className="text-lime-dark font-medium">+6 años de experiencia</span>
             </div>
